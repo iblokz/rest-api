@@ -1,0 +1,19 @@
+{
+	"users": {
+		"model": "User",
+		"schema": {
+			"name": "String",
+		    "email": "String",
+		    "password": "String",
+		    "date_created": { "type": "Date", "default": "Date.now" }
+		}
+	},
+	"articles": {
+		"model": "Article",
+		"schema": {
+			"title" : "String",
+			"body" : "String",
+			"createdBy" : { "type": "Schema.Types.ObjectId", "ref":"User", "required": false}
+		}
+	}
+}
