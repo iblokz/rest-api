@@ -2,34 +2,35 @@
 
 var express = require("express"),
 	http = require("http"),
-	restify = require("./restify.js"),
 	mongoose = require('mongoose'),
+	bodyParser = require('body-parser'),
+	methodOverride = require('method-override'),
+	restify = require("../lib/restify.js"),
 	restMap = require('./rest.json');
 
 
 var app = express();
 
 
-mongoose.connect('mongodb://localhost/express_test'); // connect to our database
+//mongoose.connect('mongodb://localhost/express_test'); // connect to our database
+var db = mongoose.connect('mongodb://localhost/express_test');
 
 
+app.set('port',process.env.PORT || 3000);
+//app.set('views',__dirname+'/app/views');
+//app.set('view engine','jade');
 
-app.configure(function(){
-	app.set('port',process.env.PORT || 3000);
-	app.set('views',__dirname+'/app/views');
-	app.set('view engine','jade');
+app.use(bodyParser.urlencoded({
+	extended: true
+}));
+app.use(bodyParser.json());
+app.use(methodOverride());
 
-	app.use(express.bodyParser());
-	app.use(express.methodOverride());
-	app.use(app.router);
-	app.use(express.static(__dirname+"/public"));
-});
+app.use(express.static(__dirname+"/public"));
 
 app.get("/", function(req,res){
 	res.send("Hello World!");
 });
-
-
 
 var users = {};
 
@@ -38,13 +39,14 @@ users.list = function(req, res){
 	res.render("users", {title: "list users"});
 }
 
-users.show = function(req, res){
+users.view = function(req, res){
 	res.render("users", {title: "show user: "+req.params.id});
 }
 */
 
 
-restify.apply(app,restMap,{users:users});
+
+restify.apply(app,restMap,{},db);
 
 
 /*

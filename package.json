@@ -1,18 +1,16 @@
 {
-  "name": "exptest",
-  "version": "0.0.0",
-  "description": "",
-  "private": "true",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+  "name": "restify",
+  "description": "a lib to bootstrap restfull apis",
+  "version": "0.0.1",
+  "author": {
+    "name": "Alex Milanov",
+    "email": "alex@i4web.biz"
   },
-  "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "~3.5.1",
-    "jade": "~1.3.1",
-    "mongoose": "~3.8.9"
+    "mongoose": "~3.8.17",
+    "express": "~4.9.7",
+    "lodash": "~2.4.1",
+    "q": "~1.0.1"
   }
 }
