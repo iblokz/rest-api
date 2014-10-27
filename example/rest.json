@@ -1,6 +1,7 @@
 {
 	"users": {
 		"model": "User",
+		"collectionCtrls": ["me"],
 		"schema": {
 			"name": "String",
 		    "email": "String",

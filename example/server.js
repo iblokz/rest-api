@@ -32,7 +32,25 @@ app.get("/", function(req,res){
 	res.send("Hello World!");
 });
 
-var users = {};
+// init model
+restify.loadModel(restMap, db);
+
+// custom controller example
+var customCtrls = {
+	users: {}
+};
+
+// load the crudify as a service
+var usersCrudify = restify.crudify('User',db);
+
+customCtrls.users.me = function(req, res){
+	usersCrudify.promiseStoreById("5377230d3647d7266323ae4f").then(
+		function(store){
+			res.jsonp(store);
+		},function(err){
+			res.jsonp({error: err});
+		});
+}
 
 /*
 users.list = function(req, res){
@@ -46,7 +64,7 @@ users.view = function(req, res){
 
 
 
-restify.apply(app,restMap,{},db);
+restify.initRoutes(app,restMap,customCtrls,db);
 
 
 /*
