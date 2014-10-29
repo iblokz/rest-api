@@ -1,9 +1,11 @@
 # iblokz / restify
-RAD framework build on top of express and mongoose that 
-- both parses mongoose schema and serves RESTful API from a .json file
-- provides toolkit that abstract common CRUD operations (crudify) with:
- - express middleware (for example: crud.list(req, res)
- - promises interface - crud.promiseList(req, match, project, sort, populate)
+a nodejs RAD framework build on top of express and mongoose that 
+- uses a json map to
+ - parses mongoos schema
+ - serve RESTful API
+- provides toolkit that abstract common CRUD operations with:
+ - express middleware
+ - promises interface
 
 ## Usage
 for a complete example look into the example/ dir
@@ -46,7 +48,7 @@ for a complete example look into the example/ dir
 ### lib/crudify.js
 - express middleware
  - list (req, res)
- - view (req, res)
+ - read (req, res)
  - create (req, res)
  - update (req, res)
  - delete (req, res)
