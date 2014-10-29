@@ -1,8 +1,8 @@
 # iblokz / restify
 a nodejs RAD framework build on top of express and mongoose that 
 - uses a json map to
- - parse mongoos schema
  - serve RESTful API
+ - parse mongoose schema
 - provides toolkit that abstract common CRUD operations with:
  - express middleware
  - promises interface
