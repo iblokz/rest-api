@@ -13,8 +13,8 @@ var app = express();
 
 
 //mongoose.connect('mongodb://localhost/express_test'); // connect to our database
-var db = mongoose.connect('mongodb://localhost/express_test');
 
+var db = mongoose.connect('mongodb://localhost/restify_example');
 
 app.set('port',process.env.PORT || 3000);
 //app.set('views',__dirname+'/app/views');
@@ -32,6 +32,9 @@ app.get("/", function(req,res){
 	res.send("Hello World!");
 });
 
+
+
+
 // init model
 restify.loadModel(restMap, db);
 
@@ -44,13 +47,25 @@ var customCtrls = {
 var usersCrud = restify.crudify('User',db);
 var articlesCrud = restify.crudify('Article',db);
 
+// set up example data
+require('./dbSetup')(db);
+
 customCtrls.users.me = function(req, res){
-	usersCrud.promiseStoreById("5377230d3647d7266323ae4f").then(
-		function(store){
-			res.jsonp(store);
-		},function(err){
-			res.jsonp({error: err});
-		});
+
+	// get the first user
+	usersCrud.promiseList().then(function(usersList){
+		// get the id of the first user
+		usersCrud.promiseStoreById(usersList.list[0]._id).then(
+			function(store){
+				res.jsonp(store);
+			},function(err){
+				res.jsonp({error: err});
+			});
+	}, function(err){
+		res.jsonp({error: err});
+	});
+
+	
 }
 
 customCtrls.users.articles = function(req, res){
@@ -64,16 +79,6 @@ customCtrls.users.articles = function(req, res){
 			res.jsonp({error: err});
 		});
 }
-
-/*
-users.list = function(req, res){
-	res.render("users", {title: "list users"});
-}
-
-users.view = function(req, res){
-	res.render("users", {title: "show user: "+req.params.id});
-}
-*/
 
 
 
