@@ -9,13 +9,13 @@
 
 		var userDocument = {
 			"name" : "John Doe",
-		    "email" : "test@test.com",
-		    "password" : "secret"
+			"email" : "test@test.com",
+			"password" : "secret"
 		};
 
 		var articleDocument = {
 			"title" : "Test Article",
-    		"body" : "Test Test"
+			"body" : "Test Test"
 		}
 
 		usersCrud.promiseList().then(function(usersList){
