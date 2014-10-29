@@ -1,7 +1,12 @@
 {
 	"users": {
 		"model": "User",
-		"collectionCtrls": ["me"],
+		"collectionCtrls": {
+			"get": ["me"]
+		},
+		"documentCtrls": {
+			"get": ["articles"]
+		},
 		"schema": {
 			"name": "String",
 		    "email": "String",
@@ -14,7 +19,7 @@
 		"schema": {
 			"title" : "String",
 			"body" : "String",
-			"createdBy" : { "type": "Schema.Types.ObjectId", "ref":"User", "required": false}
+			"createdBy" : { "type": "ObjectId", "ref":"User", "required": false}
 		}
 	}
 }

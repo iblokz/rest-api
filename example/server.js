@@ -41,12 +41,25 @@ var customCtrls = {
 };
 
 // load the crudify as a service
-var usersCrudify = restify.crudify('User',db);
+var usersCrud = restify.crudify('User',db);
+var articlesCrud = restify.crudify('Article',db);
 
 customCtrls.users.me = function(req, res){
-	usersCrudify.promiseStoreById("5377230d3647d7266323ae4f").then(
+	usersCrud.promiseStoreById("5377230d3647d7266323ae4f").then(
 		function(store){
 			res.jsonp(store);
+		},function(err){
+			res.jsonp({error: err});
+		});
+}
+
+customCtrls.users.articles = function(req, res){
+
+	var userStore = req.store;
+
+	articlesCrud.promiseList({ createdBy: userStore._id }).then(
+		function(list){
+			res.jsonp(list);
 		},function(err){
 			res.jsonp({error: err});
 		});
