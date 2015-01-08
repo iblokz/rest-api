@@ -1,5 +1,5 @@
 {
-  "name": "restify",
+  "name": "iblokz-node-restify",
   "description": "a lib to bootstrap restfull apis",
   "version": "0.0.1",
   "author": {
