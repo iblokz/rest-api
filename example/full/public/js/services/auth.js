@@ -1,9 +1,6 @@
 "use strict"
 app.factory('Auth',
 	function ($rootScope, $state, $templateCache, $http, $location, $cookieStore) {
-	
-	 	
- 	
 		var Auth = {
 			register: function (user) {				
 				$http.post("/api/register", user)

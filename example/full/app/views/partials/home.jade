@@ -35,8 +35,27 @@
 				button.btn.btn-default(type='submit',data-ng-click='register()') Register
 	
 	.row(data-ng-if="signedIn()")
-		.cols-xs-12
+		.cols-xs-12(data-ng-controller="ArticlesCtrl")
 			br
-			h3 Hello {{ userData.name }}!
+			h4 Hello {{ userData.name }}!
 			a(ng-click="logout()").btn.btn-primary.btn-block Logout
+
+			h3 Articles
+			table.table
+				thead: tr
+					th id
+					th title
+					th actions
+				tbody
+					tr(data-ng-repeat="article in articles.list")
+						td {{ article._id }}
+						td {{ article.title }}
+						td
+							a.btn.btn-sm.btn-primary(data-ng-click="edit(article)") edit
+			form
+				.form-group
+					label Title
+					input.form-control(type='text',name='title',data-ng-model='article.title')
+					input(type='hidden',name='_id',data-ng-model='article._id')
+				button.btn.btn-default(type='submit',data-ng-click='save()') Save
 			

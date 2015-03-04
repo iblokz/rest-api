@@ -30,7 +30,7 @@ module.exports = function(db){
 	});
 
 	// init additional model from restify
-	restify.loadModel(restMap);
+	restify.loadModel(restMap, db);
 
 	// config stuff
 
@@ -79,7 +79,7 @@ module.exports = function(db){
 	});
 
 	// TODO: load additional routes
-	restify.initRoutes(app,restMap,{});
+	restify.initRoutes(app,restMap,{},db);
 
 	return app;
 }
