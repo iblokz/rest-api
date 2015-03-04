@@ -1,0 +1,33 @@
+{
+	"config": {
+		"userRoles": ["admin","publisher","user"]
+	},
+	"collections": {
+		"articles": {
+			"model": "Article",
+			"schema": {
+				"title" : "String",
+				"body" : "String",
+				"createdBy" : { "type": "ObjectId", "ref":"User", "required": false}
+			}
+		}
+	},
+	"routes": {
+		"api" : {
+			"_meta": {
+				"virtual": true,
+				"crud": true,
+				"contentType": "json"
+			},
+			"articles": {
+				"_meta": {
+					"access": {
+						"admin": "all",
+						"publisher": "own",
+						"user": "list,view"
+					}
+				}
+			}
+		}
+	}
+}

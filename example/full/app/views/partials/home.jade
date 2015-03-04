@@ -1,0 +1,42 @@
+
+.container(data-ng-controller="AuthCtrl")
+	.row(data-ng-if="!signedIn()")
+		.cols-xs-12
+			br
+			ul.nav.nav-tabs(data-ng-init="loginBoxTab=1")
+				li(data-ng-class="(loginBoxTab==1)?'active':''")
+					a(data-ng-click="loginBoxTab=1") Login
+				li(data-ng-class="(loginBoxTab==2)?'active':''")
+					a(data-ng-click="loginBoxTab=2") Register
+			br
+			form(data-ng-if="loginBoxTab==1")
+				.form-group
+					label Email
+					input.form-control(type='text',name='email',data-ng-model='user.email')
+				.form-group
+					label Password
+					input.form-control(type='password',name='password',data-ng-model='user.password')
+				button.btn.btn-default(type='button',data-ng-click='login()') Login
+			form(data-ng-if="loginBoxTab==2")
+				.form-group
+					label Role
+					select.form-control(name='role',data-ng-model='user.role',data-ng-init='user.role="user"')
+						option(value='user') User
+						option(value='publisher') Publisher
+				.form-group
+					label Full Name
+					input.form-control(type='text',name='name',data-ng-model='user.name')
+				.form-group
+					label Email
+					input.form-control(type='text',name='email',data-ng-model='user.email')
+				.form-group
+					label Password
+					input.form-control(type='password',name='password',data-ng-model='user.password')
+				button.btn.btn-default(type='submit',data-ng-click='register()') Register
+	
+	.row(data-ng-if="signedIn()")
+		.cols-xs-12
+			br
+			h3 Hello {{ userData.name }}!
+			a(ng-click="logout()").btn.btn-primary.btn-block Logout
+			

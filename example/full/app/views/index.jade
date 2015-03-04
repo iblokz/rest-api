@@ -1,0 +1,30 @@
+doctype html
+html(lang="en")
+	head
+		title. 
+			Restify Full Example
+		link(rel='stylesheet', href='/lib/bootstrap/dist/css/bootstrap.css')
+		link(rel='stylesheet', href='/lib/font-awesome/css/font-awesome.css')
+		style.
+			a {
+				cursor: pointer;
+			}
+	body(data-ng-app="restify")
+
+		.container
+			h1 Restify Full Example
+
+			section(data-ui-view='')
+
+		script(type='text/javascript', src='/lib/angular/angular.js')
+		script(type='text/javascript', src='/lib/ui-router/release/angular-ui-router.js')
+		script(type='text/javascript', src='/lib/angular-resource/angular-resource.js')
+		script(type='text/javascript', src='/lib/angular-cookies/angular-cookies.js')
+
+		//- App
+		script(type='text/javascript', src='/js/app.js')
+		script(type='text/javascript', src='/js/services/auth.js')
+		script(type='text/javascript', src='/js/services/article.js')
+		script(type='text/javascript', src='/js/controllers/auth.js')
+		script(type='text/javascript', src='/js/controllers/articles.js')
+		
