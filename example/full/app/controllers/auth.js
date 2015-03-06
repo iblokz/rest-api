@@ -61,7 +61,9 @@ exports.login = function(req, res, next) {
 			user.salt = undefined;
 			
 			if(user.role != 'admin' && user.active === false){
-				return res.redirect('/');	
+				return res.status(401).send({
+					message: 'User is not active yet!'
+				});	
 			}
 
 			req.login(user, function(err) {
