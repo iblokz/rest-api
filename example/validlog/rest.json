@@ -4,15 +4,14 @@
 			"model": "User",
 			"schema": {
 				"name": "String",
-				"email": "String",
-				"password": "String",
-				"dateCreated": { "type": "Date", "default": "Date.now" }
+				"email": { "type":"String", "isEmail":true, "unique": true},
+				"password": "String"
 			}
 		},
 		"articles": {
 			"model": "Article",
 			"schema": {
-				"title" : { "type": "String", "required": true },
+				"title" : { "type": "String", "required": true, "minLength": 1, "maxLength": 5, "unique": true },
 				"viewCount": { "type": "Number", "min": 1},
 				"body" : "String",
 				"createdBy" : { "type": "ObjectId", "ref":"User", "required": false},
