@@ -10,6 +10,9 @@
 				"body" : "String",
 				"createdBy" : { "type": "ObjectId", "ref":"User", "required": false}
 			}
+		},
+		"users": {
+			"model": "User"
 		}
 	},
 	"routes": {
@@ -25,6 +28,22 @@
 						"admin": "all",
 						"publisher": "own",
 						"user": "list,view"
+					}
+				}
+			},
+			"users": {
+				"articles": {
+					"_meta": {
+						"hookAt": "document",
+						"hook": {
+							"hostParam": "userId",
+							"linkField": "createdBy"
+						},
+						"access": {
+							"admin": "all",
+							"publisher": "own",
+							"user": "list,view"
+						}
 					}
 				}
 			}
