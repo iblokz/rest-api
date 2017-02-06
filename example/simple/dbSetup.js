@@ -1,40 +1,40 @@
 'use strict';
 
-var crudify = require('../../lib/crudify.js');
-
 module.exports = function(db) {
-	var usersCrud = crudify('User', db);
-	var articlesCrud = crudify('Article', db);
+	const User = db.model('User');
+	const Article = db.model('Article');
 
-	var userDocument = {
-		name: 'John Doe',
-		email: 'test@test.com',
-		password: 'secret'
+	const mock = {
+		user: {
+			name: 'John Doe',
+			email: 'test@test.com',
+			password: 'secret'
+		},
+		articles: [{
+			title: 'Test Article',
+			body: 'Test Test'
+		}, {
+			title: 'Test Article 1',
+			body: 'Test Test Test'
+		}]
 	};
 
-	var articleDocument = {
-		title: 'Test Article',
-		body: 'Test Test'
-	};
-
-	usersCrud.promiseList().then(function(usersList) {
+	User.find().exec().then(users =>
 		// if users empty create test data
-		if (usersList.total === 0) {
-			usersCrud.promiseCreate(userDocument).then(function(userStore) {
-				articleDocument.createdBy = userStore._id;
-
-				return articlesCrud.promiseCreate(articleDocument).then(function(articleStore) {
-					return {
+		(users.length === 0)
+			? User.create(mock.user).then(user =>
+				Article.create(mock.articles.map(article => Object.assign({}, article, {createdBy: user._id})))
+					.then(articles => ({
 						msg: 'Succesfuly imported example data',
-						user: userStore,
-						article: articleStore
-					};
-				});
-			}).then(function(result) {
-				console.log(result);
-			}, function(errors) {
-				console.log(errors);
-			});
-		}
-	});
+						user,
+						articles
+					}))
+				)
+				.then(function(result) {
+					console.log(result);
+				}, function(errors) {
+					console.log(errors);
+				})
+			: true
+	);
 };

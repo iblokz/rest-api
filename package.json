@@ -1,50 +1,49 @@
 {
-	"name": "iblokz-rest-api",
-	"description": "a lib to bootstrap restfull apis",
-	"version": "0.0.1",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/iblokz/rest-map.git"
-	},
-	"scripts": {
-		"test": "mocha --colors test/**/*",
-		"test-watch": "npm run test -- --watch",
-		"coverage": "nym npm run test",
-		"lint": "eslint lib"
-	},
-	"nyc": {
-		"include": [
-			"adapters/**/*.js",
-			"common/**/*.js",
-			"app/**/*.js",
-			"ui/**/*.js"
-		],
-		"exclude": [
-			"node_modules/",
-			"test/"
-		],
-		"reporter": [
-			"lcov",
-			"text",
-			"html"
-		]
-	},
-	"author": {
-		"name": "Alex Milanov",
-		"email": "alex@i4web.biz"
-	},
-	"license": "ISC",
-	"dependencies": {
-		"bluebird": "^3.4.1",
-		"express": "~4.9.7",
-		"lodash": "~2.4.1",
-		"mongoose": "^4.7.7"
-	},
-	"devDependencies": {
-		"chai": "^3.5.0",
-		"eslint": "^3.0.1",
-		"eslint-config-google": "^0.6.0",
-		"mocha": "^3.2.0",
-		"nyc": "^10.1.2"
-	}
+  "name": "iblokz-rest-api",
+  "description": "a lib to bootstrap restfull apis",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iblokz/rest-map.git"
+  },
+  "scripts": {
+    "test": "mocha --colors test/**/*",
+    "test-watch": "npm run test -- --watch",
+    "coverage": "nym npm run test",
+    "lint": "eslint lib"
+  },
+  "nyc": {
+    "include": [
+      "adapters/**/*.js",
+      "common/**/*.js",
+      "app/**/*.js",
+      "ui/**/*.js"
+    ],
+    "exclude": [
+      "node_modules/",
+      "test/"
+    ],
+    "reporter": [
+      "lcov",
+      "text",
+      "html"
+    ]
+  },
+  "author": {
+    "name": "Alex Milanov",
+    "email": "alex@i4web.biz"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "express": "~4.9.7",
+    "iblokz": "github:iblokz/iblokz",
+    "mongoose": "^4.7.7"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^3.0.1",
+    "eslint-config-google": "^0.6.0",
+    "mocha": "^3.2.0",
+    "nyc": "^10.1.2"
+  }
 }

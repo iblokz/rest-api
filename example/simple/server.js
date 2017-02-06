@@ -27,41 +27,34 @@ app.use(methodOverride());
 
 app.use(express.static(path.join(__dirname, '/public')));
 
-app.get('/', function(req, res) {
-	res.send('Hello World!');
-});
+// app.get('/', function(req, res) {
+// 	res.send('Hello World!');
+// });
 
 // init model
 restify.loadModel(restMap, db);
 
-// custom controller example
-var customCtrls = {
-	users: {}
-};
-
-// load the crudify as a service
-var usersCrud = restify.crudify('User', db);
-var articlesCrud = restify.crudify('Article', db);
-
 // set up example data
 require('./dbSetup')(db);
 
-customCtrls.users.me = (req, res) =>
-	// get the first user
-	usersCrud.promiseList()
-		// get the id of the first user
-		.then(usersList => usersCrud.promiseStoreById(usersList.list[0]._id))
-		.then(
-			data => res.json({data}),
-			error => res.json({error})
-		);
-
-customCtrls.users.articles = (req, res) =>
-	articlesCrud.promiseList({createdBy: req.storeUser._id})
-	.then(
-		data => res.json({data}),
-		error => res.json({error})
-	);
+// custom controller example
+const customCtrls = {
+	users: {
+		me: (req, res) =>
+			// get the first user
+			db.model('User').findOne()
+				.then(
+					data => res.json({data}),
+					error => res.json({error})
+				),
+		articles: (req, res) =>
+			db.model('Article').find({createdBy: req.store.user._id})
+				.then(
+					data => res.json({data}),
+					error => res.json({error})
+				)
+	}
+};
 
 restify.initRoutes(app, restMap, customCtrls, db);
 

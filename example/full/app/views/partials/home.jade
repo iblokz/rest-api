@@ -33,7 +33,7 @@
 					label Password
 					input.form-control(type='password',name='password',data-ng-model='user.password')
 				button.btn.btn-default(type='submit',data-ng-click='register()') Register
-	
+
 	.row(data-ng-if="signedIn()")
 		.cols-xs-12(data-ng-controller="ArticlesCtrl")
 			br
@@ -52,10 +52,16 @@
 						td {{ article.title }}
 						td
 							a.btn.btn-sm.btn-primary(data-ng-click="edit(article)") edit
+							| &nbsp;
+							a.btn.btn-sm.btn-danger(data-ng-click="delete(article)") delete
 			form
 				.form-group
 					label Title
 					input.form-control(type='text',name='title',data-ng-model='article.title')
-					input(type='hidden',name='_id',data-ng-model='article._id')
-				button.btn.btn-default(type='submit',data-ng-click='save()') Save
-			
+				.form-group
+					label Body
+					textarea.form-control(type='text',name='body',data-ng-model='article.body')
+				input(type='hidden',name='_id',data-ng-model='article._id')
+				button.btn.btn-success(type='submit',data-ng-click='save()') Save
+				| &nbsp;
+				button.btn.btn-default(type='button',data-ng-click='clear()') Clear

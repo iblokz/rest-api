@@ -1,11 +1,11 @@
 # iblokz / restify
-a nodejs RAD framework build on top of express and mongoose that 
+a nodejs RAD framework build on top of express and mongoose that
 - uses a json map to
  - serve RESTful API
  - parse mongoose schema
 - provides toolkit that abstract common CRUD operations with:
  - express middleware
- - promises interface
+ - promises interface (depricated)
 
 ## Usage
 for a complete example look into the example/ dir
@@ -46,16 +46,5 @@ for a complete example look into the example/ dir
 
 
 ### lib/crudify.js
-- express middleware
- - list (req, res)
- - read (req, res)
- - create (req, res)
- - update (req, res)
- - delete (req, res)
- - getByID (req, res, next, id)
-- promises interface
- - promiseList
- - promiseCreate
- - promiseStoreById
-- helper functions
- - parseId (id) // parses a string into a mongoose ObjectId 
+- moved middleware functionality to lib/crud/middleware.js
+- promise logic depricated -> use mongoose api instead

@@ -9,9 +9,7 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
-var mongoStore = require('connect-mongo')({
-	session: session
-});
+var MongoStore = require('connect-mongo')(session);
 var flash = require('connect-flash');
 var config = require('./config');
 
@@ -34,8 +32,8 @@ module.exports = function(db){
 
 	// config stuff
 
-	app.set('views',__dirname+'/../app/views');
-	app.set('view engine','jade');
+	app.set('views', __dirname + '/../app/views');
+	app.set('view engine', 'jade');
 
 	app.use(bodyParser.urlencoded({
 		extended: true
@@ -48,8 +46,8 @@ module.exports = function(db){
 		saveUninitialized: true,
 		resave: true,
 		secret: 'tumba lumba ping pong',
-		store: new mongoStore({
-			db: db.connection.db,
+		store: new MongoStore({
+			mongooseConnection: db.connection,
 			collection: 'sessions'
 		}),
 		cookie: {
