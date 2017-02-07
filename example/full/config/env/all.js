@@ -1,11 +1,11 @@
 'use strict';
 
-var path = require('path');
-var rootPath = path.normalize(__dirname + '/../..');
+const path = require('path');
+const rootPath = path.normalize(path.join(__dirname, '../..'));
 
 module.exports = {
 	app: {
-		title: 'Restify Full Example',
+		title: 'REST API Full Example',
 		description: '',
 		keywords: ''
 	},
@@ -14,8 +14,8 @@ module.exports = {
 	templateEngine: 'jade',
 	sessionSecret: 'MEAN',
 	sessionCollection: 'sessions',
-	languages: ['bg','en'],
+	languages: ['bg', 'en'],
 	defaultLanguage: 'bg',
-	roles: ['anon','admin','user','publisher'],
-	userRoles: ['user','publisher']
+	roles: ['anon', 'admin', 'user', 'publisher'],
+	userRoles: ['user', 'publisher']
 };

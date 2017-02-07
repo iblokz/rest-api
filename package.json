@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/iblokz/rest-map.git"
+    "url": "https://github.com/iblokz/rest-api.git"
   },
   "scripts": {
     "test": "mocha --colors test/**/*",

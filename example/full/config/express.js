@@ -1,38 +1,35 @@
-'use strict'
-var path = require('path');
-var http = require('http');
-var fileUtil = require('../util/file');
-var passport = require('passport');
+'use strict';
 
-var express = require('express');
-var bodyParser = require('body-parser');
-var methodOverride = require('method-override');
-var cookieParser = require('cookie-parser');
-var session = require('express-session');
-var MongoStore = require('connect-mongo')(session);
-var flash = require('connect-flash');
-var config = require('./config');
+const path = require('path');
+const fileUtil = require('../util/file');
+const passport = require('passport');
 
-// restify
-var restify = require("../../../lib/restify.js");
-var restMap = require("../data/rest.json");
+const express = require('express');
+const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+const flash = require('connect-flash');
+// restApi
+const restApi = require("../../../lib");
+const restMap = require("../data/rest.json");
 
-
-module.exports = function(db){
+module.exports = function(db) {
 	// declare our app
-	var app = express();
+	const app = express();
 
 	// Initialize models
 	fileUtil.walk('./app/models', /(.*)\.(js$|coffee$)/).forEach(function(modelPath) {
 		require(path.resolve(modelPath));
 	});
 
-	// init additional model from restify
-	restify.loadModel(restMap, db);
+	// init additional models
+	restApi.loadModel(restMap, db);
 
 	// config stuff
 
-	app.set('views', __dirname + '/../app/views');
+	app.set('views', path.join(__dirname, '../app/views'));
 	app.set('view engine', 'jade');
 
 	app.use(bodyParser.urlencoded({
@@ -63,7 +60,7 @@ module.exports = function(db){
 
 	app.use(flash());
 
-	app.use(express.static(__dirname+"/../public"));
+	app.use(express.static(path.join(__dirname, '../public')));
 
 	/*
 	fileUtil.walk('./app/middleware', /(.*)\.(js$|coffee$)/).forEach(function(middlewarePath) {
@@ -77,7 +74,7 @@ module.exports = function(db){
 	});
 
 	// TODO: load additional routes
-	restify.initRoutes(app,restMap,{},db);
+	restApi.initRoutes(app, restMap, {}, db);
 
 	return app;
-}
+};

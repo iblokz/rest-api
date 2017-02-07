@@ -1,6 +1,6 @@
 /**
- * Export lib/restify
+ * Export lib
  *
  */
 
-module.exports = require('./lib/restify');
+module.exports = require('./lib');
