@@ -1,7 +1,7 @@
 {
-  "name": "restify-full-example",
+  "name": "rest-api-full-example",
   "version": "0.0.0",
-  "homepage": "https://github.com/iblokz/restify",
+  "homepage": "https://github.com/iblokz/rest-api",
   "authors": [
     "Alex Milanov <alex@i4web.biz>"
   ],

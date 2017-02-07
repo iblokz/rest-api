@@ -10,9 +10,9 @@
 			},
 			"schema": {
 				"name": "String",
-			    "email": "String",
-			    "password": "String",
-			    "date_created": { "type": "Date", "default": "Date.now" }
+		    "email": "String",
+		    "password": "String",
+		    "date_created": { "type": "Date", "default": "Date.now" }
 			}
 		},
 		"articles": {

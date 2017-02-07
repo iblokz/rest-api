@@ -1,16 +1,47 @@
 {
-  "name": "iblokz-node-restify",
+  "name": "iblokz-rest-api",
   "description": "a lib to bootstrap restfull apis",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iblokz/rest-api.git"
+  },
+  "scripts": {
+    "test": "mocha --colors test/**/*",
+    "test-watch": "npm run test -- --watch",
+    "coverage": "nym npm run test",
+    "lint": "eslint lib"
+  },
+  "nyc": {
+    "include": [
+      "lib/**/*.js"
+    ],
+    "exclude": [
+      "node_modules/",
+      "test/",
+			"example/"
+    ],
+    "reporter": [
+      "lcov",
+      "text",
+      "html"
+    ]
+  },
   "author": {
     "name": "Alex Milanov",
     "email": "alex@i4web.biz"
   },
   "license": "ISC",
   "dependencies": {
-    "mongoose": "~3.8.17",
     "express": "~4.9.7",
-    "lodash": "~2.4.1",
-    "q": "~1.0.1"
+    "iblokz": "github:iblokz/iblokz",
+    "mongoose": "^4.7.7"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^3.0.1",
+    "eslint-config-google": "^0.6.0",
+    "mocha": "^3.2.0",
+    "nyc": "^10.1.2"
   }
 }
