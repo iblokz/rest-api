@@ -20,7 +20,6 @@
 		"guard-for-in": 0,
 		"no-warning-comments": 0,
 		"new-cap": 0,
-		"no-unused-vars": 0,
 		"no-sequences": 0
 	}
 }

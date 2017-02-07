@@ -14,14 +14,12 @@
   },
   "nyc": {
     "include": [
-      "adapters/**/*.js",
-      "common/**/*.js",
-      "app/**/*.js",
-      "ui/**/*.js"
+      "lib/**/*.js"
     ],
     "exclude": [
       "node_modules/",
-      "test/"
+      "test/",
+			"example/"
     ],
     "reporter": [
       "lcov",
