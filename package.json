@@ -1,6 +1,6 @@
 {
   "name": "iblokz-rest-api",
-  "description": "a lib to bootstrap restfull apis",
+  "description": "Generates a rest api with mongodb middleware from a json file",
   "version": "1.0.0",
   "repository": {
     "type": "git",

@@ -1,9 +1,9 @@
 # iBlokz / REST API (formerly restify, rest-map)
-Bootstrap a rest api with mongodb from a json file
+Generates a rest api with mongodb middleware from a json file
 
 ## Install
 ```sh
-npm install iblokz/rest-api
+npm install iblokz-rest-api
 ```
 
 ## Basic Usage
