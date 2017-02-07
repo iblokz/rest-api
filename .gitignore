@@ -1,3 +1,10 @@
+# npm
 node_modules
+npm-debug.log
+
 example/node_modules
 example/full/public/lib
+
+# nyc
+.nyc_output
+coverage

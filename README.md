@@ -1,61 +1,78 @@
-# iblokz / restify
-a nodejs RAD framework build on top of express and mongoose that 
-- uses a json map to
- - serve RESTful API
- - parse mongoose schema
-- provides toolkit that abstract common CRUD operations with:
- - express middleware
- - promises interface
+# iBlokz / REST API (formerly restify, rest-map)
+Bootstrap a rest api with mongodb from a json file
 
-## Usage
-for a complete example look into the example/ dir
-### rest.json
+## Install
+```sh
+npm install iblokz/rest-api
+```
+
+## Basic Usage
+- server.js
+```js
+// dependencies
+const express = require('express');
+const mongoose = require('mongoose');
+
+// rest api
+const restApi = require('iblokz-rest-api');
+const restMap = require('./rest.json');
+
+// create app and db instances
+const app = express();
+const db = mongoose.connect('mongodb://localhost/rest_api_example');
+
+// loads the models from json schema
+restApi.loadModel(restMap, db);
+
+
+// initis rest endpoints
+restApi.initRoutes(app, restMap, {}, db);
+
+```
+
+- rest.json
 ```json
-  {
-  	"users": {
-  		"model": "User",
-  		"collectionCtrls": {
-  			"get": ["me"]
-  		},
-  		"documentCtrls": {
-  			"get": ["articles"]
-  		},
-  		"schema": {
-  			"name": "String",
-  		    "email": "String",
-  		    "password": "String",
-  		    "date_created": { "type": "Date", "default": "Date.now" }
-  		}
-  	},
-  	"articles": {
-  		"model": "Article",
-  		"schema": {
-  			"title" : "String",
-  			"body" : "String",
-  			"createdBy" : { "type": "ObjectId", "ref":"User", "required": false}
-  		}
-  	}
-  }
+{
+	"collections": {
+		"users": {
+			"model": "User",
+			"schema": {
+				"name": "String",
+				"email": { "type":"String", "isEmail":true, "unique": true},
+				"password": "String"
+			}
+		},
+		"articles": {
+			"model": "Article",
+			"schema": {
+				"title" : { "type": "String", "required": true, "minLength": 1, "maxLength": 5, "unique": true },
+				"viewCount": { "type": "Number", "min": 1},
+				"body" : "String",
+				"createdBy" : { "type": "ObjectId", "ref":"User", "required": false},
+				"dateCreated": { "type": "Date", "default": "Date.now" }
+			}
+		}
+	},
+	"routes": {
+		"api" : {
+			"_meta": {
+				"virtual": true,
+				"crud": true,
+				"contentType": "json"
+			},
+			"users": {},
+			"articles": {}
+		}
+	}
+}
 ```
 
 ## API
-
-### lib/restify.js
-- loadModel (map, db) // parses and loads all schemas from the restMap into mongoose models
-- initRoutes (app, map, ctrl, db) // generates the RESTful API endpoints with crud functionality
-
-
-### lib/crudify.js
-- express middleware
- - list (req, res)
- - read (req, res)
- - create (req, res)
- - update (req, res)
- - delete (req, res)
- - getByID (req, res, next, id)
-- promises interface
- - promiseList
- - promiseCreate
- - promiseStoreById
-- helper functions
- - parseId (id) // parses a string into a mongoose ObjectId 
+- **lib/index.js**
+	- loadModel (map, db) // parses and loads all schemas from the restMap into mongoose models
+	- initRoutes (app, map, ctrl, db) // generates the RESTful API endpoints with crud functionality
+- **lib/crud/middleware.js**
+- **lib/route/auth.js**
+- **lib/route/builder.js**
+- **lib/schema/parser.js**
+- **lib/schema/validator.js**

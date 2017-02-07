@@ -1,4 +1,4 @@
-"use string"
+'use strict';
 
 /**
  * First we set the node enviornment variable if not set before
