@@ -19,7 +19,7 @@
     "exclude": [
       "node_modules/",
       "test/",
-			"example/"
+      "example/"
     ],
     "reporter": [
       "lcov",
@@ -34,7 +34,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "~4.9.7",
-    "iblokz": "github:iblokz/iblokz",
+    "iblokz-data": "^1.0.1",
     "mongoose": "^4.7.7"
   },
   "devDependencies": {
