@@ -14,12 +14,12 @@
 			{ "overrides": { "?": "before", ":": "before", "&&": "before", "||": "before" } }
 		],
 		"no-return-assign": ["error", "except-parens"],
-		"no-sequences": 1,
 		"dot-notation": 0,
 		"valid-jsdoc": 0,
 		"guard-for-in": 0,
 		"no-warning-comments": 0,
 		"new-cap": 0,
-		"no-sequences": 0
+		"no-sequences": 0,
+		"no-unused-vars": 1
 	}
 }
