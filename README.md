@@ -1,4 +1,4 @@
-# iBlokz / REST API (formerly restify, rest-map)
+# iBlokz / REST API
 Generates a rest api with mongodb middleware from a json file
 
 ## Install

@@ -4,7 +4,7 @@
 			"model": "User",
 			"schema": {
 				"name": "String",
-				"email": { "type":"String", "isEmail":true, "unique": true},
+				"email": { "type": "String", "isEmail": true, "unique": true},
 				"password": "String"
 			}
 		},
