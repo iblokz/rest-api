@@ -37,14 +37,14 @@ require('./dbSetup')(db);
 // custom controller example
 const customCtrls = {
 	users: {
-		me: (req, res) =>
+		me: (prefs, meta) => (req, res) =>
 			// get the first user
 			db.model('User').findOne()
 				.then(
 					data => res.json({data}),
 					error => res.json({error})
 				),
-		articles: (req, res) =>
+		articles: (prefs, meta) => (req, res) =>
 			db.model('Article').find({createdBy: req.store.user._id})
 				.then(
 					data => res.json({data}),
