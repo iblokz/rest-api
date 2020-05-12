@@ -20,7 +20,7 @@
     "express": "~4.9.7",
     "express-session": "^1.9.3",
     "jade": "~1.7.0",
-    "method-override": "~2.2.0",
+    "method-override": "~3.0.0",
     "mongoose": "^4.7.7",
     "passport": "^0.2.1",
     "passport-local": "^1.0.0"
