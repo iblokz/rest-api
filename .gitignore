@@ -8,3 +8,4 @@ example/full/public/lib
 # nyc
 .nyc_output
 coverage
+docs/

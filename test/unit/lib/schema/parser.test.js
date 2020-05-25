@@ -3,7 +3,7 @@
 const expect = require('chai').expect;
 // const mongoose = require('mongoose');
 
-const parser = require('../../../lib/schema/parser');
+const parser = require('../../../../lib/schema/parser');
 
 describe('schema/parser', () => (
   describe('parseType', () => (

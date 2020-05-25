@@ -1,0 +1,36 @@
+{
+	"collections": {
+		"users": {
+			"model": "User",
+			"schema": {
+				"_id": "String",
+				"fullName": "String",
+		    "email": "String",
+		    "password": "String",
+		    "createdAt": { "type": "Date", "default": "Date.now" }
+			}
+		},
+		"articles": {
+			"model": "Article",
+			"schema": {
+				"_id": "String",
+				"title" : "String",
+				"slug": "String",
+				"text" : "String",
+				"createdBy" : { "type": "String", "ref":"User", "required": false},
+				"createdAt": { "type": "Date", "default": "Date.now" }
+			}
+		}
+	},
+	"routes": {
+		"api" : {
+			"_meta": {
+				"virtual": true,
+				"crud": true,
+				"contentType": "json"
+			},
+			"users": {},
+			"articles": {}
+		}
+	}
+}

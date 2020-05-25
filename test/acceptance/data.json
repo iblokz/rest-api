@@ -1,0 +1,19 @@
+{
+	"users": [
+		{
+			"name": "John Doe",
+			"email": "test@test.com",
+			"password": "secret"
+		}
+	],
+	"articles": [
+		{
+			"title": "Test Article",
+			"body": "Test Test"
+		},
+		{
+			"title": "Test Article 1",
+			"body": "Test Test Test"
+		}
+	]
+}
