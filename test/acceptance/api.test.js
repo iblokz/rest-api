@@ -6,13 +6,19 @@ const {expect} = require('chai');
 // helpers
 const {initServer} = require('./helpers/server');
 const {createDb, destroyDb} = require('./helpers/database');
+const mock = require('./helpers/mock');
 
 // iblokz rest api
 const api = require('../../lib/index.js');
 
 // data
 const rest = require('./rest.json');
-const mockData = require('./data.json');
+const mockData = {};
+mockData.users = mock.users(3);
+mockData.articles = mock.articles([].concat(
+	...mockData.users.map(({_id}) => Array(4).fill({createdBy: _id}))
+));
+// console.log(mockData);
 
 let mongoServer;
 let db;
@@ -21,11 +27,9 @@ let app;
 const populateData = (db, mockData) => {
 	const User = db.model('User');
 	const Article = db.model('Article');
-	return User.create(mockData.users[0]).then(user =>
-		Article.create(mockData.articles.map(
-			article => Object.assign({}, article, {createdBy: user._id})
-		)).then(articles => ({
-			user,
+	return User.insertMany(mockData.users).then(users =>
+		Article.insertMany(mockData.articles).then(articles => ({
+			users,
 			articles
 		}))
 	);
@@ -71,31 +75,38 @@ describe('/api/users', () => (
 					// console.log(res.body),
 					expect(res.body).to.be.an('object'),
 					// expect(res.body.query).to.be.an('object'),
-					expect(res.body.total).to.equal(1),
-					expect(res.body.start).to.equal(1),
+					expect(res.body.total).to.equal(mockData.users.length),
+					expect(res.body.start).to.equal(0),
 					expect(res.body.limit).to.equal(10),
 					expect(res.body.list).to.be.an('array'),
-					expect(res.body.list.length).to.equal(1)
+					expect(res.body.list.length).to.equal(mockData.users.length),
+					res.body.list.forEach(
+						(item, index) => expect(item).to.deep.include(mockData.users[index])
+					)
 				))
 		)
 	))
 ));
 describe('/api/articles', () => (
 	describe('GET', () => (
-		it('returns a list with a prepopulated articles', () =>
+		it('returns a list with within a specific range of articles', () =>
 			request(app)
 				.get('/api/articles')
+				.query({start: 2, limit: 3})
 				.set('accept', 'application/json')
 				.expect(status.OK)
 				.then(res => (
 					// console.log(res.body),
 					expect(res.body).to.be.an('object'),
 					// expect(res.body.query).to.be.an('object'),
-					expect(res.body.total).to.equal(2),
-					expect(res.body.start).to.equal(1),
-					expect(res.body.limit).to.equal(10),
+					expect(res.body.total).to.equal(mockData.articles.length),
+					expect(res.body.start).to.equal(2),
+					expect(res.body.limit).to.equal(3),
 					expect(res.body.list).to.be.an('array'),
-					expect(res.body.list.length).to.equal(2)
+					expect(res.body.list.length).to.equal(3),
+					res.body.list.forEach(
+						(item, index) => expect(item).to.deep.include(mockData.articles.slice(2 + index).shift())
+					)
 				))
 		)
 	))
