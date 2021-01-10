@@ -1,7 +1,7 @@
 {
   "name": "iblokz-rest-api",
   "description": "Generates a rest api with mongodb middleware from a json file",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/iblokz/rest-api.git"
